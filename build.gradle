@@ -1,28 +1,43 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.5.3'
+    id 'org.springframework.boot' version '3.2.5'
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'org.delivery'
-version = '0.0.1-SNAPSHOT'
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
+//부모 프로젝트는 소스 코드를 가지고 있지 않아서 빌드해도 jar파일이 안떨어진다.
+bootJar.enabled = false // 루트 모듈은 실행 가능한 jar 생성 X
+jar.enabled = false //jar도 패키징 안함
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
+subprojects { //모든 하위 모듈 이 설정 적용
+    group = 'org.delivery'
+    version = '0.0.1-SNAPSHOT'
 
-tasks.named('test') {
-    useJUnitPlatform()
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies { //모든 하위 모듈의 추가될 의존성
+        implementation 'org.springframework.boot:spring-boot-starter'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }

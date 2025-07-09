@@ -1,1 +1,4 @@
 rootProject.name = 'chrok_bam'
+include 'api'
+include 'db'
+
