@@ -12,7 +12,7 @@ repositories {
     mavenCentral()
 }
 
-subprojects { //모든 하위 모듈 이 설정 적용
+subprojects {
     group = 'org.delivery'
     version = '0.0.1-SNAPSHOT'
 
@@ -35,9 +35,24 @@ subprojects { //모든 하위 모듈 이 설정 적용
         implementation 'org.springframework.boot:spring-boot-starter'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+
+
     }
 
     test {
         useJUnitPlatform()
     }
+}
+
+// 부모 프로젝트의 build.gradle
+// subprojects 블록은 "모든 하위 모듈에 이 설정을 적용해라 라는 뜻이라서 거기 넣으면 너 자신을 의존해라가 된다.
+dependencies {
+    implementation project(':user-module')
+    implementation project(':product-module')
+    implementation project(':order-module')
 }

@@ -1,4 +1,8 @@
 rootProject.name = 'chrok_bam'
-include 'api'
-include 'db'
+
+include 'common-module'
+include 'user-module'
+include 'product-module'
+include 'order-module'
+include 'user-module'
 
