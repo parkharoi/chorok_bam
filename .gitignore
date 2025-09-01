@@ -9,6 +9,7 @@ build/
 /api-module/src/main/resources/application.yml
 
 
+/user-module/src/main/resources/application.yml
 ### STS ###
 .apt_generated
 .classpath
