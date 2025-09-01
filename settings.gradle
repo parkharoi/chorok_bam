@@ -5,4 +5,5 @@ include 'user-module'
 include 'product-module'
 include 'order-module'
 include 'user-module'
+include 'api-module'
 

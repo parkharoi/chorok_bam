@@ -5,6 +5,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# API module
+/api-module/src/main/resources/application.yml
+
+
 ### STS ###
 .apt_generated
 .classpath
