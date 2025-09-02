@@ -1,4 +1,4 @@
-package org.delivery.common.domain;
+package org.delivery.user.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
