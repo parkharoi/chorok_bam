@@ -1,4 +1,3 @@
-// TokenProvider.java
 package org.delivery.api.jwt;
 
 import io.jsonwebtoken.Claims;
@@ -39,11 +38,14 @@ public class TokenProvider {
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(key).build().parseClaimsJws(token);
+            Jwts.parser()
+                    .setSigningKey(key)
+                    .build()
+                    .parseSignedClaims(token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | io.jsonwebtoken.MalformedJwtException e) {
             log.error("잘못된 jwt 서명입니다.", e);
-        }catch (io.jsonwebtoken.ExpiredJwtException e) {
+        } catch (io.jsonwebtoken.ExpiredJwtException e) {
             log.error("만료된 jwt 서명입니다.", e);
         }
         return false;
@@ -53,9 +55,10 @@ public class TokenProvider {
         Claims claims = Jwts.parser()
                 .setSigningKey(key)
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+                .parseSignedClaims(token)
+                .getPayload();
 
         return claims.getSubject();
     }
+
 }

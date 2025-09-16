@@ -1,34 +1,26 @@
+
 plugins {
     id 'java'
-}
-
-group = 'org.delivery'
-version = 'unspecified'
-
-repositories {
-    mavenCentral()
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
 }
 
 dependencies {
-    // JPA 의존성을 여기에 명시합니다.
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    // MySQL Connector 의존성
     implementation 'com.mysql:mysql-connector-j:8.4.0'
-
-    // Spring Security, Validation 등 나머지 의존성
     implementation project(':common-module')
     implementation 'org.springframework.security:spring-security-crypto:6.3.1'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
-    // Lombok, JUnit 등
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
-test {
-    useJUnitPlatform()
+
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
 }
