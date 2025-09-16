@@ -32,10 +32,6 @@ subprojects {
     }
 
     dependencies {
-        //jpa와 db 드라이버 추가
-        //implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        //runtimeOnly 'com.h2database:h2'
-
         implementation 'org.springframework.boot:spring-boot-starter'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

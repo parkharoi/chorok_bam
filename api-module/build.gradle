@@ -1,18 +1,17 @@
 
-plugins {
-    id 'org.springframework.boot'
-    id 'io.spring.dependency-management'
-    id 'java'
-}
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'io.jsonwebtoken:jjwt:0.12.5' // 모든 jjwt-api, impl, jackson 포함
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     implementation project(':user-module')
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
+    implementation project(':product-module')
+    implementation project(':order-module')
 
 }
