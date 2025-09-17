@@ -27,4 +27,18 @@ public class ProductService {
         return productRepository.save(newProduct);
     }
 
+    @Transactional
+    public Product update(Long id, ProductRegisterDto dto) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다. id=" + id));
+
+        product.setName(dto.getName());
+        product.setPrice(dto.getPrice());
+        product.setDescription(dto.getDescription());
+        product.setStock(dto.getStock());
+
+        return product;
+    }
+
+
 }
