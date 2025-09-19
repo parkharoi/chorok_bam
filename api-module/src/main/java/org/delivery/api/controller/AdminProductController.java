@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/admin/products")
 @RequiredArgsConstructor
-//@PreAuthorize("hasAnyAuthority('ADMIN')")
+@PreAuthorize("hasAnyAuthority('ADMIN')")
 public class AdminProductController {
 
     private final ProductService productService;
@@ -28,5 +28,11 @@ public class AdminProductController {
             @PathVariable Long id, @RequestBody ProductRegisterDto productRegisterDto ) {
         Product updateProduct = productService.update(id, productRegisterDto);
         return ResponseEntity.ok(updateProduct);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id ) {
+        productService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

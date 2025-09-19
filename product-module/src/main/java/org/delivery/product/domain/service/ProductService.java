@@ -8,11 +8,27 @@ import org.delivery.product.domain.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
+
+
+    //단일 상품 조회
+    @Transactional(readOnly = true)
+    public Product getProduct(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다. id =" + id));
+    }
+
+    //전체 상품 조회
+    @Transactional(readOnly = true)
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 
     @Transactional
     public Product register(ProductRegisterDto productRegisterDto) {
@@ -40,5 +56,12 @@ public class ProductService {
         return product;
     }
 
+    @Transactional
+    public void delete(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다. id=" + id));
+
+        productRepository.delete(product);
+    }
 
 }
