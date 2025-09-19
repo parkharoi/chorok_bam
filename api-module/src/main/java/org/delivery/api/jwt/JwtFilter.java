@@ -47,10 +47,4 @@ public class JwtFilter extends OncePerRequestFilter {
         return null;
     }
 
-    //로그인, 회원가입에서 막는거 방지
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        String path = request.getRequestURI();
-        return path.startsWith("/api/users/register") || path.startsWith("/api/users/login");
-    }
 }

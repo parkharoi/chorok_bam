@@ -32,7 +32,7 @@ public class UserApiController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody @Validated UserLoginDto userLoginDto) {
         User loggedinUser = userService.login(userLoginDto);
-        String jwt = tokenProvider.createToken(loggedinUser.getEmail());
+        String jwt = tokenProvider.createToken(loggedinUser.getEmail(), loggedinUser.getRole().name());
 
         return ResponseEntity.ok(
                 LoginResponseDto.builder()
