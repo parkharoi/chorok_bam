@@ -4,22 +4,34 @@ import lombok.RequiredArgsConstructor;
 import org.delivery.product.domain.Product;
 import org.delivery.product.domain.dto.ProductRegisterDto;
 import org.delivery.product.domain.service.ProductService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/products")
 @RequiredArgsConstructor
-//@PreAuthorize("hasAnyAuthority('ADMIN')")
+@PreAuthorize("hasAnyAuthority('ADMIN')")
 public class AdminProductController {
 
     private final ProductService productService;
 
-    @PostMapping("/register")
-    public ResponseEntity<Product> register(@RequestBody @Validated ProductRegisterDto productRegisterDto) {
-        Product newProduct = productService.register(productRegisterDto);
+    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Product> register(
+            @RequestPart @Validated ProductRegisterDto productRegisterDto,
+            @RequestPart("thumbnailImage")MultipartFile thumbnailImage,
+            @RequestPart("detailImages")List<MultipartFile> detailImages
+            ) {
+
+        if (detailImages.size() >= 20) {
+            throw new IllegalArgumentException("상세 이미지는 최대 20장까지 가능합니다.");
+        }
+        Product newProduct = productService.registerWithImages(productRegisterDto, thumbnailImage, detailImages);
         return ResponseEntity.ok(newProduct);
     }
 

@@ -3,6 +3,8 @@ package org.delivery.product.domain.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.delivery.product.domain.Product;
+import org.delivery.product.domain.ProductStatus;
 
 import java.math.BigDecimal;
 
@@ -22,4 +24,6 @@ public class ProductRegisterDto {
 
     @NotNull
     private Long stock;
+
+    private ProductStatus status;
 }

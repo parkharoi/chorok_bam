@@ -35,6 +35,9 @@ public class Product {
     private Long stock;
 
     @Column(nullable = true)
+    private String thumbnailImageUrl;
+
+    @Column(nullable = true)
     private String imageUrl;
 
 }
