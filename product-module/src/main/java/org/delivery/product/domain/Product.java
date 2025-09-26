@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table
@@ -34,10 +35,7 @@ public class Product {
     @Column(nullable = false)
     private Long stock;
 
-    @Column(nullable = true)
-    private String thumbnailImageUrl;
-
-    @Column(nullable = true)
-    private String imageUrl;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductImage> productImages;
 
 }

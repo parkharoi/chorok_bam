@@ -18,6 +18,8 @@ public class ProductImage {
 
     private String imageUrl;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     private ImageType type;

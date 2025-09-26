@@ -5,7 +5,6 @@ import org.delivery.common.file.FileStorageService;
 import org.delivery.product.domain.ProductImage;
 import org.delivery.product.domain.dto.ProductRegisterDto;
 import org.delivery.product.domain.Product;
-import org.delivery.product.domain.ProductStatus;
 import org.delivery.product.domain.repository.ProductImageRepository;
 import org.delivery.product.domain.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -38,7 +37,12 @@ public class ProductService {
                 .build());
 
         String thumbnailUrl = fileStorageService.upload(thumbnailImages);
-        product.setThumbnailImageUrl(thumbnailUrl);
+        ProductImage thumbnail = ProductImage.builder()
+                .product(product)
+                .imageUrl(thumbnailUrl)
+                .type(ProductImage.ImageType.THUMBNAIL)
+                .build();
+        productImageRepository.save(thumbnail);
 
         for (MultipartFile detailImage : detailImages) {
             String imageUrl = fileStorageService.upload(detailImage);
