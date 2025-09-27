@@ -1,5 +1,5 @@
 // SecurityConfig.java
-package org.delivery.api.config;
+package org.delivery.api.sequrity;
 
 import lombok.RequiredArgsConstructor;
 import org.delivery.api.jwt.JwtFilter;
