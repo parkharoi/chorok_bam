@@ -1,6 +1,6 @@
 package org.delivery.api.controller;
 import lombok.RequiredArgsConstructor;
-import org.delivery.product.domain.Product;
+import org.delivery.product.domain.entity.Product;
 import org.delivery.product.domain.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package org.delivery.api.sequrity;
+package org.delivery.user.security;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,13 +1,13 @@
 package org.delivery.api.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.delivery.product.domain.Product;
+import org.delivery.product.domain.entity.Product;
 import org.delivery.product.domain.dto.ProductRegisterDto;
 import org.delivery.product.domain.service.ProductService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,15 +23,24 @@ public class AdminProductController {
 
     @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Product> register(
-            @RequestPart @Validated ProductRegisterDto productRegisterDto,
-            @RequestPart("thumbnailImage")MultipartFile thumbnailImage,
-            @RequestPart("detailImages")List<MultipartFile> detailImages
+            //@Valid
+            @RequestPart("productData") ProductRegisterDto productRegisterDto,
+            @RequestPart(value = "thumbnailImg")MultipartFile thumbnailImage,
+            @RequestPart(value = "detailImg")List<MultipartFile> detailImages
             ) {
 
-        if (detailImages.size() >= 20) {
-            throw new IllegalArgumentException("상세 이미지는 최대 20장까지 가능합니다.");
+        System.out.println("DEBUG: 1. 컨트롤러 진입 성공."); // 콘솔 로그
+
+        if (detailImages != null) {
+            if (detailImages.size() >= 20) {
+                throw new IllegalArgumentException("상세 이미지는 최대 20장까지 가능합니다.");
+            }
         }
+        System.out.println("DEBUG: 2. 유효성 검사 통과."); // 콘솔 로그
+
         Product newProduct = productService.registerWithImages(productRegisterDto, thumbnailImage, detailImages);
+
+        System.out.println("DEBUG: 3. 서비스 호출 성공."); // 콘솔 로그
         return ResponseEntity.ok(newProduct);
     }
 

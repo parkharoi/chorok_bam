@@ -1,6 +1,7 @@
 package org.delivery.product.domain.repository;
 
-import org.delivery.product.domain.ProductImage;
+import org.delivery.product.domain.entity.Product;
+import org.delivery.product.domain.entity.ProductImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -10,4 +11,6 @@ public interface ProductImageRepository extends JpaRepository<ProductImage, Long
     List<ProductImage> findByProductId(Long productId);
 
     List<ProductImage> findByProductIdAndType(Long productId, ProductImage.ImageType type);
+
+    List<ProductImage> findByProduct(Product product);
 }

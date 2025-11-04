@@ -1,4 +1,4 @@
-package org.delivery.product.domain;
+package org.delivery.product.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,5 +37,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> productImages;
+
+
 
 }

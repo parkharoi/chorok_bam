@@ -1,5 +1,6 @@
 package org.delivery.api.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.delivery.api.dto.ApiErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,8 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestControllerAdvice // 모든 @Controller, @RestController에서 발생하는 예외를 가로챕니다.
+@Slf4j
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     // 403 Forbidden (인가 실패) 처리
@@ -49,6 +51,8 @@ public class GlobalExceptionHandler {
                 .collect(Collectors.toList());
 
         String errorMessage = "유효성 검사 실패: " + String.join(", ", errorMessages);
+
+        log.warn("요청 DTO 유효성 검사 실패 상세 메시지: {}", errorMessage);
 
         ApiErrorResponse response = ApiErrorResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
