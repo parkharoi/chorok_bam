@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/users/login", "/api/users/register").permitAll() // 로그인, 회원가입 경로는 인증 없이 허용
                         .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated() // 나머지 모든 요청은 인증 필요
                 )
                 .exceptionHandling(exception -> exception
