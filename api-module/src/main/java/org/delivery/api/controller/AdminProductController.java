@@ -23,7 +23,7 @@ public class AdminProductController {
 
     @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Product> register(
-            //@Valid
+            @Valid
             @RequestPart("productData") ProductRegisterDto productRegisterDto,
             @RequestPart(value = "thumbnailImg")MultipartFile thumbnailImage,
             @RequestPart(value = "detailImg")List<MultipartFile> detailImages

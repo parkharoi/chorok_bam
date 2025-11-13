@@ -45,7 +45,7 @@ public class ProductService {
         }
 
         //2.상세 이미지
-        if (detailImages != null) { // ✨ 이 Null 체크가 핵심입니다.
+        if (detailImages != null) {
             for (MultipartFile detailImage : detailImages) {
                 if (!detailImage.isEmpty()) {
                     saveProductImage(product, detailImage, ProductImage.ImageType.DETAIL);
