@@ -41,7 +41,7 @@ public class Cart {
     for(CartItem item : cartItems) {
       if(item.getProduct().equals(product)) {
         item.addCount(quantity);
-        return;;
+        return;
       }
     }
     CartItem newItem = CartItem.createCartItem(this, product, quantity, product.getPrice());
@@ -52,13 +52,10 @@ public class Cart {
     cartItems.removeIf(item -> item.getProduct().equals(product));
   }
 
-  public Long getTotalPrice() {
+  public BigDecimal getTotalPrice() {
     return cartItems.stream()
-        .mapToLong(CartItem::getTotalPrice)
+        .map(CartItem::getTotalPrice)
         .reduce(BigDecimal.ZERO, BigDecimal::add);
   }
-
-
-
 
 }

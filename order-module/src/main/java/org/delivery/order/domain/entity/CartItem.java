@@ -50,7 +50,7 @@ public class CartItem extends BaseEntity {
     this.quantity += count;
   }
 
-  public Long getTotalPrice(){
+  public BigDecimal getTotalPrice(){
     return price.multiply(BigDecimal.valueOf(quantity)) ;
   }
 
