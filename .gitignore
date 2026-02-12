@@ -7,11 +7,10 @@ build/
 
 # API module
 /api-module/src/main/resources/application.yml
+/api-module/src/main/resources/uploads
 
-
-/user-module/src/main/resources/application.yml
 ### STS ###
-.apt_generated
+.apt_generateds
 .classpath
 .factorypath
 .project

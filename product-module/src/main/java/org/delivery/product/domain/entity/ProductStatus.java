@@ -1,4 +1,4 @@
-package org.delivery.product.domain;
+package org.delivery.product.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -9,7 +9,17 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'com.mysql:mysql-connector-j:8.4.0'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     implementation project(':common-module')
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok' // Lombok 프로세서
+
+    // MapStruct 프로세서 (매퍼 구현체 생성)
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    // Lombok과 MapStruct의 연동을 위한 필수 바인딩
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 }
 
 bootJar {
